@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express from 'express';
-import userRoutes from "./routers/userRouters" 
-import { connectDB, sequelize } from './config/database';
+import userRoutes from "./routers/userRouters.js" 
+import { connectDB, sequelize } from './config/database.js';
 
 const app = express()
 
