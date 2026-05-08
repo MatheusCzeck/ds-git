@@ -19,15 +19,16 @@ export const getSoldados = async (req, res) => {
 }
 
 export const getSoldado = async (req, res) => {
-    try{
-        const soldado = await Soldado.findByPk(req.params.id)
-        if (!soldado){
-            return res.status(404).json({ error: "Soldado não encontrado" })
-        }
-        return res.status(200).json(soldado)
-    }catch (error){
-        return res.status(500).json({ error: error.message })
-    }
+    // try{
+    //     const soldado = await Soldado.findByPk(req.params.id)
+    //     if (!soldado){
+    //         return res.status(404).json({ error: "Soldado não encontrado" })
+    //     }
+    //     return res.status(200).json(soldado)
+    // }catch (error){
+    //     return res.status(500).json({ error: error.message })
+    // }
+    console.log("Vai corinthians")
 }
 
 export const updateSoldado = async (req, res) => {
