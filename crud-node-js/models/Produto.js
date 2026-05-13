@@ -1,11 +1,11 @@
 import { DataTypes } from "sequelize";
-import connectDB from "../config/dbTestSequelize.js";
+import { sequelize } from "../config/database.js"
 import Fabricante from "./Fabricante.js";
 import Categoria from "./Categoria.js";
 import CategoriaProduto from "./CategoriaProduto.js";
 
 
-const Produto = connectDB.define("produto", {
+export const Produto = sequelize.define("produto", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,

@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
 const connectDB = new Sequelize(
-    'nodejs_init',
+    'soldadonodejs',
     'root',
     'root',
     {

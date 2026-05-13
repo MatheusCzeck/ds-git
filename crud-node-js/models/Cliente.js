@@ -1,25 +1,25 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
 
-export const Cliente = sequelize.define("Cliente", {
+export const Cliente = sequelize.define("cliente", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
     nome: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
-      cpf: {
-        type: Sequelize.STRING(11),
-        allowNull: false,
-        unique: true
-      },
-      email: Sequelize.STRING,
-      telefone: {
-        type: Sequelize.STRING,
-        allowNull: true
+    cpf: {
+      type: DataTypes.STRING(11),
+      allowNull: false,
+      unique: true
+    },
+    email: DataTypes.STRING,
+    telefone: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
 }, {
     tableName: "clientes",

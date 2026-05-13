@@ -9,7 +9,7 @@ Sequelize(env.db.name,
     {
         host: env.db.host,
         port: env.db.port,
-        dialect: env.db.dialect,
+        dialect: 'mysql',
         logging: false
     }
 );
