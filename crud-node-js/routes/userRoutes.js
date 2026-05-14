@@ -6,6 +6,7 @@ import {
     updateUser,
     deleteUser
 } from "../controllers/userController.js";
+import { authMiddleware } from "../middleware/AuthMiddleware.js";
 
 const router = Router();
 
@@ -28,13 +29,15 @@ const router = Router();
  *                 type: string
  *               email:
  *                 type: string
+ *               password:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Usuário criado
  *       500:
 *          description: Erro ao listar usuários
  */
-router.post("/user", createUser)
+router.post("/user", AuthMiddleware, createUser)
 
 /**
  * @swagger
@@ -48,7 +51,7 @@ router.post("/user", createUser)
  *       500:
  *         description: Erro ao listar usuários
  */
-router.get("/user", getUsers)
+router.get("/user", AuthMiddleware, getUsers)
 
 /**
  * @swagger
@@ -71,7 +74,7 @@ router.get("/user", getUsers)
  *       500:
  *         description: Erro ao buscar usuário
  */
-router.get("/user/:id", getUser)
+router.get("/user/:id", AuthMiddleware, getUser)
 
 /**
  * @swagger
@@ -99,6 +102,8 @@ router.get("/user/:id", getUser)
  *                 type: string
  *               email:
  *                 type: string
+ *               password:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Usuário atualizado
@@ -107,7 +112,7 @@ router.get("/user/:id", getUser)
  *       500:
  *         description: Erro ao atualizar usuário
  */
-router.put("/user/:id", updateUser)
+router.put("/user/:id", AuthMiddleware, updateUser)
 
 /**
  * @swagger
@@ -130,6 +135,6 @@ router.put("/user/:id", updateUser)
  *       500:
  *         description: Erro ao remover usuário
  */
-router.delete("/user/:id", deleteUser)
+router.delete("/user/:id", AuthMiddleware, deleteUser)
 
 export default router;
