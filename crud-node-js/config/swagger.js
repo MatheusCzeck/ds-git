@@ -14,6 +14,15 @@ const options = {
                 description: "Optional server description, e.g. Main (production) server",
             },
         ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT"
+                }
+            }
+        }
     },
     apis: ["./routes/*.js"],
 }

@@ -13,7 +13,9 @@ const router = Router();
  * @swagger
  * /cliente:
  *   post:
- *     summary: Cria um Clientes
+ *     summary: Cria um usuário
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Clientes]
  *     requestBody:
  *       required: true
@@ -22,24 +24,21 @@ const router = Router();
  *           schema:
  *             type: object
  *             properties:
- *               nome:
+ *               name:
  *                 type: string
- *               cpf:
- *                 type: integer
- *                 format: int64
- *                 maximum: 99999999999
- *                 minimum: 0
+ *               last_name:
+ *                 type: string
  *               email:
  *                 type: string
- *               telefone:
+ *               password:
  *                 type: string
  *     responses:
  *       201:
  *         description: Cliente criado
  *       500:
-*          description: Erro ao listar Clientes
+ *         description: Erro ao listar cliente
  */
-router.post("/cliente", createCliente)
+router.post("/cliente", createCliente);
 
 /**
  * @swagger
@@ -53,7 +52,7 @@ router.post("/cliente", createCliente)
  *       500:
  *         description: Erro ao listar Clientes
  */
-router.get("/cliente", getClientes)
+router.get("/cliente", getClientes);
 
 /**
  * @swagger
@@ -76,7 +75,7 @@ router.get("/cliente", getClientes)
  *       500:
  *         description: Erro ao buscar Cliente
  */
-router.get("/cliente/:id", getCliente)
+router.get("/cliente/:id", getCliente);
 
 /**
  * @swagger
@@ -100,7 +99,7 @@ router.get("/cliente/:id", getCliente)
  *             properties:
  *               nome:
  *                 type: string
- *              cpf:
+ *               cpf:
  *                 type: integer
  *                 format: int64
  *                 maximum: 99999999999
@@ -117,7 +116,7 @@ router.get("/cliente/:id", getCliente)
  *       500:
  *         description: Erro ao atualizar Cliente
  */
-router.put("/cliente/:id", updateCliente)
+router.put("/cliente/:id", updateCliente);
 
 /**
  * @swagger
@@ -140,6 +139,6 @@ router.put("/cliente/:id", updateCliente)
  *       500:
  *         description: Erro ao remover Cliente
  */
-router.delete("/cliente/:id", deleteCliente)
+router.delete("/cliente/:id", deleteCliente);
 
 export default router;

@@ -13,10 +13,10 @@ export class AuthService {
             throw new Error("Email já cadastrado")
         }
 
-        const hasdeadPassword = await bccrypt.hash(data.password, 10)
+        const hashedPassword = await bccrypt.hash(data.password, 10)
         const user = await User.create({
             ...data,
-            password: hasdeadPassword
+            password: hashedPassword
         })
         return user
     }

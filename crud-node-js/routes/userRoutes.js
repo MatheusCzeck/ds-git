@@ -1,20 +1,17 @@
 import { Router } from "express";
-import {
-    createUser,
-    getUsers,
-    getUser,
-    updateUser,
-    deleteUser
-} from "../controllers/userController.js";
+import { UserController } from "../controllers/userController.js";
 import { authMiddleware } from "../middleware/AuthMiddleware.js";
 
 const router = Router();
+const controller = new UserController()
 
 /**
  * @swagger
  * /user:
  *   post:
  *     summary: Cria um usuários
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Users]
  *     requestBody:
  *       required: true
@@ -37,13 +34,15 @@ const router = Router();
  *       500:
 *          description: Erro ao listar usuários
  */
-router.post("/user", AuthMiddleware, createUser)
+router.post("/user", authMiddleware, controller.createUser)
 
 /**
  * @swagger
  * /user:
  *   get:
  *     summary: Lista todos os usuários
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Users]
  *     responses:
  *       200:
@@ -51,13 +50,15 @@ router.post("/user", AuthMiddleware, createUser)
  *       500:
  *         description: Erro ao listar usuários
  */
-router.get("/user", AuthMiddleware, getUsers)
+router.get("/user", authMiddleware, controller.getUsers)
 
 /**
  * @swagger
  * /user/{id}:
  *   get:
  *     summary: Busca um usuário por ID
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -74,13 +75,15 @@ router.get("/user", AuthMiddleware, getUsers)
  *       500:
  *         description: Erro ao buscar usuário
  */
-router.get("/user/:id", AuthMiddleware, getUser)
+router.get("/user/:id", authMiddleware, controller.getUser)
 
 /**
  * @swagger
  * /user/{id}:
  *   put:
  *     summary: Atualiza um usuário
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -112,13 +115,15 @@ router.get("/user/:id", AuthMiddleware, getUser)
  *       500:
  *         description: Erro ao atualizar usuário
  */
-router.put("/user/:id", AuthMiddleware, updateUser)
+router.put("/user/:id", authMiddleware, controller.updateUser)
 
 /**
  * @swagger
  * /user/{id}:
  *   delete:
  *     summary: Remove um usuário
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -135,6 +140,6 @@ router.put("/user/:id", AuthMiddleware, updateUser)
  *       500:
  *         description: Erro ao remover usuário
  */
-router.delete("/user/:id", AuthMiddleware, deleteUser)
+router.delete("/user/:id", authMiddleware, controller.deleteUser)
 
 export default router;

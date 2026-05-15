@@ -33,7 +33,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 // rota auth
-app.use("/auth", authMiddleware, authRoutes)
+app.use("/api", authMiddleware, authRoutes)
 
 const start = async () => {
     await connectDB();

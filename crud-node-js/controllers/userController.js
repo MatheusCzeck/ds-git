@@ -1,58 +1,49 @@
-import { User } from '../models/User.js';
+import { UserService } from '../services/UserService.js';
 
-export const createUser = async (req, res) => {
-    try {
-        const user = await User.create(req.body);
-        return res.status(201).json(user);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
+export class UserController {
+    constructor() {
+        this.service = new UserService()
     }
-}
 
-export const getUsers = async (req, res) => {
-    try {
-        const users = await User.findAll();
-        return res.status(200).json(users);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    } 
-}
-
-export const getUser = async (req, res) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+    createUser = async (req,res) => {
+        try {
+            const user = await this.service.createUser(req.body);
+            return res.status(201).json(user);
+        } catch (error) {
+            return res.status(404).json({ message: error.message });
         }
-        return res.status(200).json(user);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
     }
-}
-
-export const updateUser = async (req, res) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+    getUsers = async (req, res) => {
+        try {
+            const users = await this.service.getUsers();
+            return res.status(200).json(users);
+        } catch (error) {
+            return res.status(404).json({ message: error.message });
+        } 
+    }
+    getUser = async (req, res) => {
+        try {
+            const user = await this.service.getUser(req.params.id);
+            return res.status(200).json(user);
+        } catch (error) {
+            return res.status(404).json({ message: error.message });
         }
-
-        await user.update(req.body);
-        return res.status(200).json(user);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
     }
-}
-
-export const deleteUser = async (req, res) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+    updateUser = async (req, res) => {
+        try {
+            const user = await this.service.updateUser(req.params.id,req.body);
+            return res.status(200).json(user);
+        } catch (error) {
+            return res.status(404).json({ message: error.message });
         }
-        await user.destroy();
-        return res.status(200).json({ message: 'User deleted successfully' });
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
     }
+    deleteUser = async (req, res) => {
+        try {
+            const user = await this.service.deleteUser(req.params.id);
+            return res.status(200).json({ message: 'User deleted successfully' });
+        } catch (error) {
+            return res.status(404).json({ message: error.message });
+        }
+    }
+
 }
